@@ -37,70 +37,94 @@ const experience = [
 
 export default function Academics() {
   return (
-    <section id="academics" className="py-24 bg-black border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="academics" className="py-24 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold tracking-tight">Academics & Experience</h2>
-          <div className="h-1 w-20 bg-white mx-auto mt-4"></div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black tracking-tight mb-4"
+          >
+            Journey & <span className="text-gradient">Growth</span>
+          </motion.h2>
+          <motion.div 
+            initial={{ width: 0 }}
+            whileInView={{ width: '80px' }}
+            viewport={{ once: true }}
+            className="h-1.5 bg-gradient-to-r from-aurora-cyan to-aurora-violet mx-auto rounded-full"
+          />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Education Timeline */}
           <div>
-            <h3 className="text-2xl font-semibold mb-8 flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-white"></span>
+            <h3 className="text-2xl font-bold mb-10 flex items-center gap-4">
+              <span className="w-10 h-10 rounded-2xl bg-aurora-cyan/10 flex items-center justify-center text-aurora-cyan">
+                <div className="w-2 h-2 rounded-full bg-aurora-cyan animate-pulse"></div>
+              </span>
               Education
             </h3>
-            <div className="space-y-8 pl-4 border-l border-white/10 relative">
+            <div className="space-y-12 pl-4 relative">
+              {/* Timeline Line */}
+              <div className="absolute left-[3px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-aurora-cyan via-aurora-violet to-transparent opacity-30"></div>
+              
               {academics.map((item, idx) => (
                 <motion.div 
                   key={idx}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.2 }}
-                  className="relative pl-6"
+                  transition={{ delay: idx * 0.2, duration: 0.6 }}
+                  className="relative pl-10 group"
                 >
-                  <div className="absolute left-[-29px] top-1.5 w-4 h-4 rounded-full bg-black border-2 border-white"></div>
+                  {/* Timeline Dot */}
+                  <div className="absolute left-[-16.5px] top-1.5 w-4 h-4 rounded-full bg-black border-2 border-aurora-cyan group-hover:scale-150 transition-transform shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
                   
-                  <div className="text-sm text-gray-400 mb-1 font-mono tracking-wider">{item.year}</div>
-                  <h4 className="text-xl font-bold mb-1">{item.degree}</h4>
-                  <div className="text-white/70 font-medium mb-3">{item.institution}</div>
-                  <p className="text-gray-400 text-sm leading-relaxed">{item.description}</p>
+                  <div className="text-xs font-black text-aurora-cyan mb-2 font-mono tracking-widest uppercase py-1 px-3 bg-aurora-cyan/10 rounded-full w-fit">
+                    {item.year}
+                  </div>
+                  <h4 className="text-2xl font-black mb-1 group-hover:text-aurora-cyan transition-colors">{item.degree}</h4>
+                  <div className="text-white/60 font-bold mb-4">{item.institution}</div>
+                  <p className="text-gray-400 leading-relaxed max-w-md">{item.description}</p>
                 </motion.div>
               ))}
             </div>
           </div>
 
           {/* Experience */}
-          <div>
-            <h3 className="text-2xl font-semibold mb-8 flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-white"></span>
-              Experience & Strengths
+          <div className="space-y-12">
+            <h3 className="text-2xl font-bold mb-10 flex items-center gap-4">
+              <span className="w-10 h-10 rounded-2xl bg-aurora-rose/10 flex items-center justify-center text-aurora-rose">
+                <div className="w-2 h-2 rounded-full bg-aurora-rose animate-pulse"></div>
+              </span>
+              Experience
             </h3>
-            <div className="grid gap-6">
+            <div className="grid gap-8">
               {experience.map((exp, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.2 }}
-                  className="glass-panel rounded-xl p-6 border border-white/10 hover:border-white/30 transition-colors"
+                  className="glass-panel rounded-3xl p-8 border border-white/10 hover:border-aurora-rose/50 transition-all group overflow-hidden relative"
                 >
-                  <div className="flex flex-col sm:flex-row justify-between items-start mb-4">
+                  <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-aurora-rose/5 blur-3xl group-hover:bg-aurora-rose/10 transition-colors"></div>
+                  
+                  <div className="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
                     <div>
-                      <h4 className="font-bold text-lg">{exp.role}</h4>
-                      <span className="text-sm text-white/70 block mt-1">{exp.company}</span>
+                      <h4 className="font-black text-2xl group-hover:text-aurora-rose transition-colors">{exp.role}</h4>
+                      <span className="text-lg text-white/60 font-bold block mt-1">{exp.company}</span>
                     </div>
-                    <div className="mt-2 sm:mt-0 font-mono text-xs px-3 py-1 bg-white/10 rounded-full text-white/70 whitespace-nowrap">
+                    <div className="font-mono text-[10px] font-black px-4 py-1.5 bg-aurora-rose/10 border border-aurora-rose/20 rounded-full text-aurora-rose tracking-tighter uppercase">
                       {exp.date}
                     </div>
                   </div>
-                  <ul className="space-y-2 mt-4">
+                  <ul className="space-y-3">
                     {exp.bullets.map((bullet, i) => (
-                      <li key={i} className="text-gray-400 text-sm flex items-start">
-                        <span className="text-white/50 mr-2">•</span>
+                      <li key={i} className="text-gray-400 flex items-start group-hover:text-white/80 transition-colors">
+                        <span className="text-aurora-rose mr-3 text-lg leading-none">›</span>
                         {bullet}
                       </li>
                     ))}
@@ -113,15 +137,24 @@ export default function Academics() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="glass-panel rounded-xl p-6 border border-white/10 hover:border-white/30 transition-colors mt-2"
+                className="glass-panel rounded-3xl p-8 border border-white/10 hover:border-aurora-indigo/50 transition-all group overflow-hidden relative"
               >
-                <h4 className="font-bold text-lg mb-4">Key Strengths</h4>
-                <ul className="space-y-2">
-                  <li className="text-gray-400 text-sm flex items-start"><span className="text-white/50 mr-2">•</span> Quick learner with a strong understanding of UI/UX design principles.</li>
-                  <li className="text-gray-400 text-sm flex items-start"><span className="text-white/50 mr-2">•</span> Effective communicator and team collaborator in both academic and remote settings.</li>
-                  <li className="text-gray-400 text-sm flex items-start"><span className="text-white/50 mr-2">•</span> Self-motivated, organized, and able to manage multiple tasks and deadlines efficiently.</li>
-                  <li className="text-gray-400 text-sm flex items-start"><span className="text-white/50 mr-2">•</span> Adaptable to new tools, frameworks, and development environments.</li>
-                </ul>
+                <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-aurora-indigo/5 blur-3xl group-hover:bg-aurora-indigo/10 transition-colors"></div>
+                
+                <h4 className="font-black text-2xl mb-6 group-hover:text-aurora-indigo transition-colors underline decoration-aurora-indigo/30 underline-offset-8">Key Strengths</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[
+                    "Quick Learner & UI/UX Focused",
+                    "Strong Communicator",
+                    "Organized & Deadline Driven",
+                    "Adaptable to New Tech"
+                  ].map((strength, i) => (
+                    <div key={i} className="flex items-center gap-3 text-gray-400 group-hover:text-white transition-colors">
+                      <div className="w-1.5 h-1.5 rounded-full bg-aurora-indigo shadow-[0_0_8px_rgba(99,102,241,0.6)]"></div>
+                      <span className="text-sm font-bold">{strength}</span>
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             </div>
           </div>

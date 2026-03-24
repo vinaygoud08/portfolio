@@ -3,10 +3,16 @@
 @theme {
   --color-primary: #ffffff;
   --color-background: #000000;
-  --color-surface: #111111;
-  --color-surface-hover: #222222;
-  --color-subtle: #888888;
-  --color-border: #333333;
+  --color-surface: #0a0a0a;
+  --color-surface-hover: #151515;
+  --color-subtle: #94a3b8;
+  --color-border: rgba(255, 255, 255, 0.1);
+  
+  /* Aurora Palette */
+  --color-aurora-violet: #8b5cf6;
+  --color-aurora-indigo: #6366f1;
+  --color-aurora-cyan: #22d3ee;
+  --color-aurora-rose: #f43f5e;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -15,6 +21,7 @@ html {
   scroll-behavior: smooth;
   background-color: var(--color-background);
   color: var(--color-primary);
+  overflow-x: hidden;
 }
 
 body {
@@ -22,31 +29,68 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: black;
+  position: relative;
 }
 
-/* Custom Scrollbar for professional look */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: black;
+  background: #000;
 }
 ::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
+  background: #1e1e1e;
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #333;
 }
 
+/* Glassmorphism & Aurora Effects */
 .glass-panel {
-  background: rgba(17, 17, 17, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, var(--color-aurora-cyan), var(--color-aurora-violet), var(--color-aurora-rose));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated Aurora Background */
+.aurora-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000 100%);
+  overflow: hidden;
+}
+
+.aurora-blob {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  animation: move 20s infinite alternate;
+}
+
+@keyframes move {
+  from { transform: translate(-20%, -20%) scale(1); }
+  to { transform: translate(20%, 20%) scale(1.1); }
 }
 
 ::selection {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--color-aurora-indigo);
   color: white;
 }
